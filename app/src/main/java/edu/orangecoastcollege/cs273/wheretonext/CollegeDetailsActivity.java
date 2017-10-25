@@ -14,8 +14,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.NumberFormat;
 
+/**
+ * CollegeDetailsActivity is the class that represents the Controller
+ * for when the User taps and wants to view a particular college's details.
+ */
 public class CollegeDetailsActivity extends AppCompatActivity {
 
+    /**
+     * onCreate is called when the User is passed to this Activity, via an Intent sent
+     * from CollegeListActivity.
+     *
+     * All the view widgets are wired up and the Intent information is retrieved and used
+     * to populate the various View widgets.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +43,8 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         Intent detailsIntent = getIntent();
         String name = detailsIntent.getStringExtra("Name");
         int population = detailsIntent.getIntExtra("Population", 0);
-        float tuition = detailsIntent.getFloatExtra("Tuition", 0.0f);
-        float rating = detailsIntent.getFloatExtra("Rating", 0.0f);
+        double tuition = detailsIntent.getDoubleExtra("Tuition", 0.0);
+        double rating = detailsIntent.getDoubleExtra("Rating", 0.0);
         String imageName = detailsIntent.getStringExtra("ImageName");
 
         AssetManager am = this.getAssets();
@@ -52,6 +64,6 @@ public class CollegeDetailsActivity extends AppCompatActivity {
         collegeDetailsNameTextView.setText(name);
         collegeDetailsPopulationTextView.setText("Annual Enrollment: " + thousands.format(population));
         collegeDetailsTuitionTextView.setText("In-state Tuition: " + currency.format(tuition));
-        gameDetailsRatingBar.setRating(rating);
+        gameDetailsRatingBar.setRating((float)rating);
     }
 }

@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/**
+ * DBHelper is a helper class of the Model.  This class helps to build and retrieve
+ * college information from the SQLite database.
+ */
 class DBHelper extends SQLiteOpenHelper {
 
     //TASK 1: DEFINE THE DATABASE VERSION, NAME AND TABLE NAME
@@ -25,10 +29,19 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_IMAGE_NAME = "image_name";
 
 
+    /**
+     * DBHelper is a parameterized constructor.
+     * @param context
+     */
     public DBHelper(Context context){
         super (context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * onCreate is called when our app WhereToNext is run.
+     * This method creates the database.
+     * @param database
+     */
     @Override
     public void onCreate (SQLiteDatabase database){
 
@@ -45,6 +58,12 @@ class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * onUpgrade is called whenever code is written to update the schema of the database.
+     * @param database
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase database,
                           int oldVersion,
@@ -58,6 +77,10 @@ class DBHelper extends SQLiteOpenHelper {
 
     //********** DATABASE OPERATIONS:  ADD, GETALL
 
+    /**
+     * addCollege is called when a user taps the Add College button.
+     * @param college
+     */
     public void addCollege(College college) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -74,6 +97,10 @@ class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * getAllColleges is called to fill out the list which displays all of the colleges in the database.
+     * @return
+     */
     public ArrayList<College> getAllColleges() {
         ArrayList<College> collegeList = new ArrayList<>();
         SQLiteDatabase database = this.getReadableDatabase();
@@ -100,11 +127,4 @@ class DBHelper extends SQLiteOpenHelper {
 
         return collegeList;
     }
-
-
-
-
-
-
-
 }
